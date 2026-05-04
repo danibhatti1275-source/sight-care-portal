@@ -1,0 +1,22 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Sign Up - Sight Care Portal{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-card">
+            <h1>Create Account</h1>
+            <p>Join Sight Care Portal to track your eye health</p>
+            
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-primary btn-full">Sign Up</button>
+            </form>
+            
+            <p class="auth-link">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

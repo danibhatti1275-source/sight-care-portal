@@ -1,0 +1,27 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Eye Diseases - Sight Care Portal{% endblock %}
+
+{% block content %}
+<section class="disease-list">
+    <div class="container">
+        <h1>12 Common Eye Diseases</h1>
+        <div class="disease-grid">
+            {% for disease in diseases %}
+            <div class="disease-card">
+                {% if disease.image %}
+                <img src="{{ disease.image.url }}" alt="{{ disease.name }}">
+                {% else %}
+                <div class="placeholder-image">👁️</div>
+                {% endif %}
+                <div class="disease-info">
+                    <h3>{{ disease.name }}</h3>
+                    <p>{{ disease.description|truncatewords:20 }}</p>
+                    <a href="{% url 'disease_detail' disease.slug %}" class="btn-read-more">Learn More →</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

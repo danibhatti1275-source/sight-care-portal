@@ -1,0 +1,42 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Self Assessment - Sight Care Portal{% endblock %}
+
+{% block content %}
+<section class="assessment-section">
+    <div class="container">
+        <h1>Eye Health Self-Assessment</h1>
+        <p class="subtitle">Select the symptoms you are experiencing to check for possible eye conditions</p>
+
+        <form method="post" class="assessment-form">
+            {% csrf_token %}
+            
+            <div class="assessment-grid">
+                {% for disease in diseases %}
+                <div class="assessment-card">
+                    <h3>{{ disease.name }}</h3>
+                    <div class="questions">
+                        {% for symptom in disease.symptoms.splitlines %}
+                            {% if symptom.strip %}
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="symptoms" value="{{ disease.name }}|{{ symptom.strip }}">
+                                <span>{{ symptom.strip }}</span>
+                            </label>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary btn-large">Get Assessment Results</button>
+            </div>
+        </form>
+
+        <div class="disclaimer">
+            <p>⚠️ <strong>Note:</strong> This self-assessment is for informational purposes only and does not replace professional medical advice. Always consult an eye doctor for proper diagnosis.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

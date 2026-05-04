@@ -1,0 +1,84 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}{{ disease.name }} - Sight Care Portal{% endblock %}
+
+{% block content %}
+<section class="disease-detail">
+    <div class="container">
+        <div class="disease-header">
+            {% if disease.image %}
+            <img src="{{ disease.image.url }}" alt="{{ disease.name }}" class="disease-image">
+            {% endif %}
+            <div class="disease-title">
+                <h1>{{ disease.name }}</h1>
+                <p class="tagline">{{ disease.description|truncatewords:10 }}</p>
+            </div>
+        </div>
+
+        <div class="content-sections">
+            <div class="section">
+                <h2>What is it?</h2>
+                <p>{{ disease.description }}</p>
+            </div>
+
+            <div class="two-column">
+                <div class="section">
+                    <h2>Common Symptoms</h2>
+                    <ul>
+                        {% for symptom in disease.symptoms.splitlines %}
+                        <li>{{ symptom }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="section warning-box">
+                    <h2>⚠️ See a Doctor Immediately If:</h2>
+                    <ul>
+                        <li>Vision becomes blurry</li>
+                        <li>Severe eye pain</li>
+                        <li>Symptoms worsen rapidly</li>
+                        <li>Symptoms last more than 7-10 days</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div class="section">
+                    <h2>Causes</h2>
+                    <ul>
+                        {% for cause in disease.causes.splitlines %}
+                        <li>{{ cause }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Prevention Tips</h2>
+                    <ul>
+                        {% for tip in disease.prevention_tips.splitlines %}
+                        <li>{{ tip }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section highlight-box">
+                <h2>Daily Eye Care Tips</h2>
+                <p>{{ disease.daily_care_tips }}</p>
+            </div>
+
+            <div class="section">
+                <h2>Simple Home Care</h2>
+                <p>{{ disease.home_care }}</p>
+            </div>
+
+            <div class="section important-note">
+                <p><strong>Important:</strong> {{ disease.important_note }}</p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="{% url 'disease_list' %}" class="btn-secondary">← Back to Diseases</a>
+            <a href="{% url 'self_assessment' %}" class="btn-primary">Take Self-Assessment</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

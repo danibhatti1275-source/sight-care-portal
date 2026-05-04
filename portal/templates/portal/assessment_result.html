@@ -1,0 +1,45 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Assessment Results - Sight Care Portal{% endblock %}
+
+{% block content %}
+<section class="assessment-results">
+    <div class="container">
+        <h1>Self-Assessment Results</h1>
+        
+        {% if possible_conditions %}
+            <div class="results-box">
+                <h2>Possible Eye Conditions Based on Your Symptoms:</h2>
+                <p class="disclaimer">⚠️ This is for informational purposes only. Please consult an eye doctor for proper diagnosis.</p>
+                
+                <div class="conditions-list">
+                    {% for condition in possible_conditions %}
+                    <div class="condition-card">
+                        <h3>{{ condition.disease.name }}</h3>
+                        <p><strong>Match Score:</strong> {{ condition.match_score }} symptom(s) matched</p>
+                        <p>{{ condition.disease.description|truncatewords:30 }}</p>
+                        <a href="{% url 'disease_detail' condition.disease.slug %}" class="btn-read-more">Learn More →</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="no-results">
+                <h2>No Specific Conditions Matched</h2>
+                <p>Your symptoms do not strongly match any specific eye condition in our database. However, if you are experiencing eye discomfort, we recommend:</p>
+                <ul>
+                    <li>Following the 20-20-20 rule for screen use</li>
+                    <li>Keeping your eyes clean and hydrated</li>
+                    <li>Getting regular eye check-ups</li>
+                    <li>Consulting an eye doctor if symptoms persist</li>
+                </ul>
+            </div>
+        {% endif %}
+        
+        <div class="actions">
+            <a href="{% url 'self_assessment' %}" class="btn-secondary">← Take Assessment Again</a>
+            <a href="{% url 'disease_list' %}" class="btn-primary">View All Eye Diseases</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

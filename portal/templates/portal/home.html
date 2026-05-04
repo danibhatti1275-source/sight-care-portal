@@ -1,0 +1,107 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+
+{% block title %}Sight Care Portal - Eye Care Center{% endblock %}
+
+{% block content %}
+<div class="eye-center-hero">
+    <div class="medical-pattern"></div>
+    
+    <!-- Floating Medical Icons -->
+    <div class="floating-icon">👁️</div>
+    <div class="floating-icon">🔬</div>
+    <div class="floating-icon">💊</div>
+    <div class="floating-icon">🩺</div>
+    
+    <div class="hero-container">
+        <!-- Left Side - Eye Image -->
+        <div class="eye-showcase">
+            <div class="main-eye-container">
+                <img src="{% static 'images/eye-anatomy.jpg' %}" alt="Human Eye Anatomy" class="main-eye-image" onerror="this.src='https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=400&fit=crop'">
+                <div class="eye-scan-line"></div>
+            </div>
+            
+            <div class="eye-stats">
+                <div class="stat-box">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Eye Diseases</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Patients Helped</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Content -->
+        <div class="hero-content-side">
+            <span class="website-name">Sight Care Portal</span>
+            
+            <h1 class="main-heading">
+                Protect Your<br>Vision Through<br>Knowledge
+            </h1>
+            
+            <p class="sub-heading">
+                Comprehensive eye health platform featuring 12 common eye conditions, 
+                symptoms analysis, prevention guides, and expert-backed self-assessment tools.
+            </p>
+            
+            <!-- Feature Cards -->
+            <div class="feature-cards">
+                <a href="{% url 'disease_list' %}" class="feature-card-medical">
+                    <div class="card-icon-real blue">📖</div>
+                    <div class="card-text">
+                        <h4>Disease Library</h4>
+                        <p>12 detailed conditions</p>
+                    </div>
+                </a>
+                
+                <a href="{% url 'self_assessment' %}" class="feature-card-medical">
+                    <div class="card-icon-real green">🔍</div>
+                    <div class="card-text">
+                        <h4>Symptom Checker</h4>
+                        <p>AI-powered assessment</p>
+                    </div>
+                </a>
+                
+                <a href="{% url 'prevention_guide' %}" class="feature-card-medical">
+                    <div class="card-icon-real red">🛡️</div>
+                    <div class="card-text">
+                        <h4>Prevention Guide</h4>
+                        <p>Daily eye care tips</p>
+                    </div>
+                </a>
+                
+                <a href="{% url 'disease_list' %}" class="feature-card-medical">
+                    <div class="card-icon-real purple">👨‍⚕️</div>
+                    <div class="card-text">
+                        <h4>Find Doctor</h4>
+                        <p>When to seek help</p>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="cta-section">
+                <a href="{% url 'self_assessment' %}" class="btn-medical-primary">
+                    Start Assessment →
+                </a>
+                <a href="{% url 'disease_list' %}" class="btn-medical-secondary">
+                    Explore Diseases
+                </a>
+            </div>
+            
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <span class="badge-item">Expert Verified</span>
+                <span class="badge-item">Medical Grade</span>
+                <span class="badge-item">Free Forever</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

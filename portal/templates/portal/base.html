@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sight Care Portal{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo">
+                <span class="logo-icon">👁️</span>
+                <span>Sight Care Portal</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'disease_list' %}">Eye Diseases</a></li>
+                <li><a href="{% url 'self_assessment' %}">Self-Assessment</a></li>
+                <li><a href="{% url 'prevention_guide' %}">Prevention</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout ({{ user.username }})</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="btn-primary">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <h3>Contact & Booking</h3>
+                <p>For appointments and eye care support, call us now:</p>
+                <p class="footer-contact"><a href="tel:+923029225922">+92 302 9225922</a></p>
+                <p class="footer-contact"><a href="tel:+923290909751">+92 329 0909751</a></p>
+            </div>
+            <div class="footer-booking-card">
+                <h3>Book an Appointment</h3>
+                <p>Schedule your visit with our experts today.</p>
+                <a href="{% url 'booking' %}" class="btn-primary">Book Now</a>
+                <p class="footer-booking-note">New here? <a href="{% url 'signup' %}">Create an account</a> first.</p>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; 2026 Sight Care Portal. Protecting Vision Through Awareness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
